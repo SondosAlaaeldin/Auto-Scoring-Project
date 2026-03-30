@@ -10,8 +10,7 @@ The implementation prioritizes interpretability and alignment with human scoring
 ##  Approach & Evaluation
 
 ### Approach
-
-The core challenge of this task is inherently **multi-dimensional**: a transcription can be grammatically flawed yet semantically correct, or grammatically clean yet semantically incorrect. Therefore, a meaningful scoring system must explicitly balance **meaning preservation** and **linguistic quality**, rather than relying on a single signal.
+According to the rubric attached [Spanish EIT Scoring Rubric.docx](https://github.com/user-attachments/files/26338648/Spanish.EIT.Scoring.Rubric.docx), The core challenge of this task is inherently **multi-dimensional**: a transcription can be grammatically flawed yet semantically correct, or grammatically clean yet semantically incorrect. Therefore, a meaningful scoring system must explicitly balance **meaning preservation** and **linguistic quality** with bias towards the meaning since it is a meaning based evaluation, rather than relying on a single signal.
 
 To reflect this, I designed a **two-component scoring framework** inspired by the provided rubric:
 
@@ -21,7 +20,7 @@ To reflect this, I designed a **two-component scoring framework** inspired by th
 
 To quantify how well a response preserves the meaning of the stimulus, I used a Sentence-BERT model (`all-MiniLM-L6-v2`). Both the stimulus and response are encoded into dense vector representations, and **cosine similarity** is computed between them.
 
-This allows the system to move beyond surface-level matching and capture **semantic equivalence**, even in the presence of paraphrasing or structural variation.
+and i chose this model because it allows the system to move beyond surface-level matching and capture **semantic equivalence**, even in the presence of paraphrasing or structural variation.
 
 ---
 
@@ -37,8 +36,9 @@ A key design decision was to **treat meaning and grammar as complementary but no
 
 This is directly aligned with the evaluation rubric:
 
-- A response that preserves meaning but contains grammatical errors should still receive a relatively high score (e.g., 3)
-- A response that fails to preserve meaning, even if grammatically correct, should be penalized more heavily
+-- A response that contains grammatical errors but preserves meaning should still receive a relatively high score (e.g., 3)
+-- A response that contains grammatical errors affecting the meaning should receive a lower score (e.g., 2)
+- A response that fails to preserve meaning, even if grammatically correct, should be penalize
 
 This reflects a prioritization of **semantic fidelity over surface correctness**, while still incorporating grammar as a refining signal.
 
@@ -48,10 +48,10 @@ This reflects a prioritization of **semantic fidelity over surface correctness**
 
 Before feature extraction, the data was carefully cleaned to avoid introducing noise into the scoring process:
 
-- Removed annotations (e.g., text inside parentheses and brackets)
+- Removed annotations (e.g., text inside parentheses and unintended texts inside brackets e.g.[cough])
 - Ensured that only the actual linguistic content was evaluated
 
-This step is critical, as even minor artifacts can distort similarity scores and grammar analysis.
+This step is critical, as even minor artifacts can affect similarity scores and grammar analysis.
 
 ---
 
@@ -79,14 +79,9 @@ Based on these observations, thresholds were iteratively adjusted to better alig
 
 ### Scoring Function
 
-The final scoring function combines both signals using rule-based thresholds:
+The final scoring function combines both signals using rule-based thresholds
 
-- Very high similarity + minimal errors → Score 4
-- High similarity with minor grammatical issues → Score 3
-- Moderate similarity and/or noticeable errors → Score 2
-- Low similarity or high error count → Score 1 or 0
-
-This design explicitly encodes the rubric’s logic, particularly the idea that:
+This design intended to encode the rubric’s logic, particularly the idea that:
 > **meaning preservation can compensate for imperfect grammar, but not vice versa**
 
 ---
@@ -122,19 +117,6 @@ To evaluate the system, I compared model predictions against the reference score
 - ±1 Tolerance Accuracy: 96.67%
 - MAE: 0.50
 - Cohen’s Kappa: 0.64
-
----
-
-### Interpretation
-
-The high ±1 tolerance accuracy indicates that the model successfully captures the **relative ordering and general scoring trends**, even when exact matches are challenging.
-
-This is expected given:
-- The **subjective nature** of scoring
-- The **coarse granularity** of discrete score levels
-- The reliance on **proxy reference scores** rather than fully validated annotations
-
-Cohen’s Kappa further confirms a **substantial level of agreement**, particularly considering the ordinal nature of the task.
 
 ---
 
