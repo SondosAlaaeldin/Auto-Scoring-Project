@@ -2,6 +2,8 @@
 
 This repository contains my solution for the AutoEIT evaluation task.
 
+The task: Implement a reproducible script that applies the meaning-based rubric to the sentence transcriptions (comparing learner utterances to prompt sentences provided) and outputs sentence-level scores for each utterance in the sample data files. Scores should be documented in 
+
 The implementation prioritizes interpretability and alignment with human scoring behavior, rather than treating the task as a purely black-box prediction problem.
 
 ---
