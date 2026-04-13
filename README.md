@@ -1,4 +1,4 @@
-﻿# Automateeed language scoring system
+﻿# Automated language scoring system
 
 ---
 
