@@ -116,6 +116,19 @@ To evaluate the system, I compared model predictions against the reference score
 
 ---
 
+## Result Analysis
+
+The evaluation results show that the model has a reasonable level of alignment with the sample scores.
+
+The exact accuracy was **60%** and **53.33%** for the two evaluation sheets, indicating that the model correctly predicted the exact score for part of the responses. However, the ±1 tolerance accuracy reached **93.33%** and **96.67%**, showing that most predictions were very close to the expected scores even when not identical.
+
+The **Mean Absolute Error (MAE)** was **0.47**, indicating that the model’s predicted scores were generally close to the sample scores on average.
+
+In addition, Cohen's kappa achieved a value of **0.65**, indicating a substantial level of agreement between the model and sample scores beyond chance.
+
+Overall, the results suggest that the scoring system performs reasonably well, although there is still room for improvement in exact score prediction.
+
+
 ### Limitations & Future Work
 
 - The reference scores are proxies and may not perfectly reflect ground truth
