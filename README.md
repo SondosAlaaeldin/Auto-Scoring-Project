@@ -34,7 +34,7 @@ This is directly aligned with the evaluation rubric:
 
 -- A response that contains grammatical errors but preserves meaning should still receive a relatively high score (e.g., 3)
 -- A response that contains grammatical errors affecting the meaning should receive a lower score (e.g., 2)
-- A response that fails to preserve meaning, even if grammatically correct, should be penalize
+-- A response that fails to preserve meaning, even if grammatically correct, should be penalized
 
 This reflects a prioritization of **semantic fidelity over surface correctness**, while still incorporating grammar as a refining signal.
 
@@ -124,7 +124,7 @@ The exact accuracy was **60%** and **53.33%** for the two evaluation sheets, ind
 
 The **Mean Absolute Error (MAE)** was **0.47**, indicating that the model’s predicted scores were generally close to the sample scores on average.
 
-In addition, Cohen's kappa achieved a value of **0.65**, indicating a substantial level of agreement between the model and sample scores beyond chance.
+In addition, Cohen's kappa achieved a value of **0.64**, indicating a substantial level of agreement between the model and sample scores beyond chance.
 
 Overall, the results suggest that the scoring system performs reasonably well, although there is still room for improvement in exact score prediction.
 
